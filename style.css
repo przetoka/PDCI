@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #e8fffb;
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    position:relative;
+}
+
+h1 {
+    text-align: center;
+    color: #45a049;
+}
+
+button {
+    margin: 10px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 20px;
+    height: 70px;
+    width: 130px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#bookList, #authorButtons {
+    margin-top: 20px;
+}
+
+#authorButtons button {
+    background-color: #3498db;
+    height: 80px;
+    width: 150px;
+    padding: 5px;
+}
+
+#authorButtons button:hover {
+    background-color: #2980b9;
+}
+
+#tryAgainButton {
+    display:none;
+    margin-top: 20px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#tryAgainButton:hover {
+    background-color: #c0392b;
+}
+
+#addForms {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+#addAuthorForm{
+    display:inline-block;
+}
+#addBookForm{
+    float:right;
+    padding: 2%;
+}
+.addForm {
+    margin-top: 20px;
+    width: 45%;
+    height: 350px;
+    padding: 2%;
+}
+
+.addForm label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.addForm input,
+.addForm select {
+    margin-bottom: 10px;
+    padding: 8px;
+    text-align: left;
+}
+
+.addForm button {
+    padding: 5px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 10px;
+    height: 40px;
+    width: 80px;
+    margin-bottom: 40px;
+}
+
+.addForm button:hover {
+    background-color: #2980b9;
+}

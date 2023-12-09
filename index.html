@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Quiz</title>
+</head>
+<body>
+
+    <h1>Book Quiz</h1>
+
+    <div id="categoryButtons" class="container">
+        <!-- Category buttons will be dynamically populated from the API -->
+    </div>
+
+    <div id="bookList"></div>
+
+    <div id="authorButtons"></div>
+
+    <button id="tryAgainButton" onclick="resetPage()">Try Again</button>
+    <hr>
+    <div id="addForms">
+        <div class="addForm" id="addAuthorForm">
+            <h2>Add Author</h2>
+            <label for="authorFirstName">First Name:</label>
+            <input type="text" id="authorFirstName" name="authorFirstName">
+
+            <label for="authorLastName">Last Name:</label>
+            <input type="text" id="authorLastName" name="authorLastName">
+
+            <button onclick="addAuthor()">Supply Author</button>
+        </div>
+
+        <div class="addForm" id="addBookForm">
+            <h2>Add Book</h2>
+            <label for="bookTitle">Title:</label>
+            <input type="text" id="bookTitle" name="bookTitle">
+
+            <label for="bookCategory">Category:</label>
+            <select id="bookCategory" name="bookCategory">
+                <!-- Categories will be dynamically populated from the API -->
+            </select>
+
+            <label for="bookAuthor">Author:</label>
+            <select id="bookAuthor" name="bookAuthor">
+                <!-- Authors will be dynamically populated from the API -->
+            </select>
+
+            <button onclick="addBook()">Supply Book</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
