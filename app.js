@@ -21,7 +21,8 @@ app.use(express.json());
 
 // Function to get the last ID for a given label from the database
 async function getLastId(label) {
-    const result = await session.run(`MATCH (n:${label}) RETURN n.id ORDER BY n.id DESC LIMIT 1`);
+    const session2 = driver.session();
+    const result = await session2.run(`MATCH (n:${label}) RETURN n.id ORDER BY n.id DESC LIMIT 1`);
     const lastId = result.records[0].get('n.id');
     return lastId ? parseInt(lastId) : 0;
 }
@@ -38,7 +39,9 @@ app.post('/authors', async (req, res) => {
     const authorId = await createId('Author');
 
     try {
-        await session.run('CREATE (a:Author {id: ' + authorId + ', name: "' + name + '", surname: "' +  surname+ '"})');
+	const sessionX = driver.session();
+        await sessionX.run('CREATE (a:Author {id: ' + authorId + ', name: "' + name + '", surname: "' +  surname+ '"})');
+
 
         res.status(201).json({ id: authorId, name, surname });
     } catch (error) {
@@ -53,18 +56,20 @@ app.post('/books', async (req, res) => {
     const bookId = await createId('Book');
 
     try {
-        await session.run(
+	const session3 = driver.session();
+        await session3.run(
             'MATCH (a:Author {id: ' + authorId + '})' +
             'CREATE (b:Book {id: ' + bookId + ', title: "' + title+ '"})<-[:WROTE]-(a)'
         );
 
-        res.status(201).json({ id: bookId, title, authorId, categoryId });
+	//res.status(201).json({ id: bookId, title, authorId, categoryId });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+	//res.status(500).json({ error: 'Internal Server Error' });
     }
     try {
-        await session.run(
+	const session4 = driver.session();
+        await session4.run(
             'MATCH (c:Category {id: ' + categoryId + '}), (b:Book {id: ' + bookId + '}) ' +
             'CREATE (b)-[:IS_CATEGORIZED_BY]->(c)'
         );
@@ -136,8 +141,8 @@ app.get('/booksauthor', async (req, res) => {
     }
   });
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(port, "0.0.0.0", () => {
+  console.log(`Server is running on http://127.0.0.1:${port}`);
 });
 
 // Close the Neo4j session and driver when the process is terminated

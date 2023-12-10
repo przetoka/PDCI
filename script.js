@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000';
+const apiUrl = 'http://13.51.238.66:3000';
 
 // Function to fetch categories from the API and create buttons
 async function populate() {
@@ -140,7 +140,7 @@ function shuffle(array) {
 window.onload = populate;
 
 // Function to reset the page to its initial state
-function resetPage() {
+async function resetPage() {
     // Clear book and author information
     document.getElementById('bookList').innerHTML = '';
     document.getElementById('authorButtons').innerHTML = '';
@@ -161,7 +161,7 @@ function showTryAgainButton() {
     tryAgainButton.style.display = 'block';
 }
 // Function to add a new author
-function addAuthor() {
+async function addAuthor() {
     const name = document.getElementById('authorFirstName').value;
     const surname = document.getElementById('authorLastName').value;
 
@@ -172,7 +172,7 @@ function addAuthor() {
     }
 
     // Send a POST request to the /authors endpoint with the new author data
-    fetch('http://localhost:3000/authors', {
+    fetch(`${apiUrl}/authors`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -194,7 +194,7 @@ function addAuthor() {
 }
 
 // Function to add a new book
-function addBook() {
+async function addBook() {
     const title = document.getElementById('bookTitle').value;
     const category = document.getElementById('bookCategory').value;
     const author = document.getElementById('bookAuthor').value;
@@ -208,7 +208,7 @@ function addBook() {
     }
 
     // Send a POST request to the /books endpoint with the new book data
-    fetch('http://localhost:3000/books', {
+    fetch(`${apiUrl}/books`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
