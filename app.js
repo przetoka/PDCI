@@ -9,9 +9,9 @@ const port = 3000;
 app.use(cors());
 
 // Replace these values with your actual Neo4j credentials
-const neo4jUri = 'neo4j+s://0b06e94f.databases.neo4j.io:7687';
-const neo4jUser = 'neo4j';
-const neo4jPassword = 'Ui2RgAcdJ7KWiYohO3dfig9-VNOxg-Lj5EoSPJZ1S4Y';
+const neo4jUri = '';
+const neo4jUser = '';
+const neo4jPassword = '';
 
 const driver = neo4j.driver(neo4jUri, neo4j.auth.basic(neo4jUser, neo4jPassword));
 const session = driver.session();
