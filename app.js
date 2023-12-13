@@ -8,7 +8,6 @@ const port = 3000;
 
 app.use(cors());
 
-// Replace these values with your actual Neo4j credentials
 const neo4jUri = '';
 const neo4jUser = '';
 const neo4jPassword = '';
@@ -16,7 +15,6 @@ const neo4jPassword = '';
 const driver = neo4j.driver(neo4jUri, neo4j.auth.basic(neo4jUser, neo4jPassword));
 const session = driver.session();
 
-// Middleware to parse JSON requests
 app.use(express.json());
 
 // Function to get the last ID for a given label from the database
@@ -93,7 +91,7 @@ app.get('/categories', async (req, res) => {
   }
 });
 
-// Endpoint to get all authors for a given category
+// Endpoint to get all authors
 app.get('/authors', async (req, res) => {
   try {
     const result = await session.run('MATCH (a:Author) RETURN a');
@@ -105,7 +103,7 @@ app.get('/authors', async (req, res) => {
   }
 });
 
-// Endpoint to get all books for a given author
+// Endpoint to get all books for a given category
 app.get('/books', async (req, res) => {
   const categoryId = req.query.categoryId;
   try {
@@ -117,7 +115,7 @@ app.get('/books', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
+// Endpoint to get all books
 app.get('/booksall', async (req, res) => {
     try {
       const result = await session.run('MATCH (b:Book) RETURN b');
@@ -128,7 +126,7 @@ app.get('/booksall', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
-
+// Endpoint to get the author for a given book
 app.get('/booksauthor', async (req, res) => {
     const bookId = req.query.bookId;
     try {
