@@ -1,6 +1,5 @@
 const apiUrl = 'http://13.51.238.66:3000';
 
-// Function to fetch categories from the API and create buttons
 async function populate() {
     const categoryButtonsDiv = document.getElementById('categoryButtons');
     
@@ -64,8 +63,6 @@ async function getRandomBooksAuthor(bookId) {
     }
 }
 
-
-// Function to fetch and display a random book from the selected category
 async function getRandomBookByCategory(categoryId) {
     try {
         const booksResponse = await fetch(`${apiUrl}/books?categoryId=${categoryId}`);
@@ -80,14 +77,12 @@ async function getRandomBookByCategory(categoryId) {
     }
 }
 
-// Function to display book information
 function displayBookInfo(book) {
     const bookListDiv = document.getElementById('bookList');
     bookListDiv.innerHTML = `<h2>Random Book from the Category</h2>
                                 <p><strong>Title:</strong> ${book.title}</p>`;
 }
 
-// Function to display four buttons with random author names
 async function displayRandomAuthors(correctAuthor) {
     const authorButtonsDiv = document.getElementById('authorButtons');
     authorButtonsDiv.innerHTML = '';
@@ -113,7 +108,6 @@ async function displayRandomAuthors(correctAuthor) {
     }
 }
 
-// Function to check if the chosen author is the author of the book title
 function checkAuthor(chosenAuthorId, correctAuthorId) {
     const resultDiv = document.getElementById('authorButtons');
     resultDiv.innerHTML = `<p><strong>Result:</strong> ${
@@ -122,12 +116,10 @@ function checkAuthor(chosenAuthorId, correctAuthorId) {
     showTryAgainButton();
 }
 
-// Function to get a random element from an array
 function getRandomElement(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
 
-// Function to shuffle an array (Fisher-Yates algorithm)
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -136,20 +128,14 @@ function shuffle(array) {
     return array;
 }
 
-// Call the function to populate categories when the page loads
 window.onload = populate;
 
-// Function to reset the page to its initial state
 async function resetPage() {
-    // Clear book and author information
     document.getElementById('bookList').innerHTML = '';
     document.getElementById('authorButtons').innerHTML = '';
     
-    // Remove the result paragraph
     document.getElementById('categoryButtons').innerHTML = '';
 
-
-    // Hide the Try Again button again
     const tryAgainButton = document.getElementById('tryAgainButton');
     tryAgainButton.style.display = 'none';
 
@@ -160,18 +146,16 @@ function showTryAgainButton() {
     const tryAgainButton = document.getElementById('tryAgainButton');
     tryAgainButton.style.display = 'block';
 }
-// Function to add a new author
+
 async function addAuthor() {
     const name = document.getElementById('authorFirstName').value;
     const surname = document.getElementById('authorLastName').value;
 
-    // Validate input
     if (!name || !surname) {
         alert('Please enter both first name and last name.');
         return;
     }
 
-    // Send a POST request to the /authors endpoint with the new author data
     fetch(`${apiUrl}/authors`, {
         method: 'POST',
         headers: {
@@ -185,7 +169,6 @@ async function addAuthor() {
     .then(response => response.json())
     .then(data => {
         console.log('Author added successfully:', data);
-        // Optionally, you can update the UI or take other actions after adding an author
     })
     .catch(error => {
         console.error('Error adding author:', error);
@@ -193,7 +176,6 @@ async function addAuthor() {
     resetPage();
 }
 
-// Function to add a new book
 async function addBook() {
     const title = document.getElementById('bookTitle').value;
     const category = document.getElementById('bookCategory').value;
@@ -201,13 +183,11 @@ async function addBook() {
     console.log(category);
     console.log(author);
 
-    // Validate input
     if (!title || !category || !author) {
         alert('Please enter book title, category, and author.');
         return;
     }
 
-    // Send a POST request to the /books endpoint with the new book data
     fetch(`${apiUrl}/books`, {
         method: 'POST',
         headers: {
@@ -222,7 +202,6 @@ async function addBook() {
     .then(response => response.json())
     .then(data => {
         console.log('Book added successfully:', data);
-        // Optionally, you can update the UI or take other actions after adding a book
     })
     .catch(error => {
         console.error('Error adding book:', error);
